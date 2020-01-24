@@ -22,9 +22,7 @@ def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
         print('Running gradle-build with wrapper enabled.')
         cmd = configure_gradle_wrapper()
 
-    res = cmd_output(cmd, 'build')
-
-    print(res)
+    cmd_output(cmd, 'build')
 
     return 0
 
