@@ -4,21 +4,4 @@
     entry: gradle-check
     language: python
     args: [--wrapper]
--   id: gradle-build
-    name: gradle build
-    description: Builds java project using gradle build
-    entry: gradle-build
-    language: python
-    args: [--wrapper]
--   id: gradle-spotless
-    name: gradle spotless
-    description: Lints java project using gradle spotless plugin
-    entry: gradle-spotless
-    language: python
-    args: [--wrapper]
--   id: gradle-task
-    name: gradle task
-    description: Runs arbitrary gradle tasks for java project
-    entry: gradle-task
-    language: python
-    args: [--wrapper]
+
