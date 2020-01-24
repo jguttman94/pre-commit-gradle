@@ -22,7 +22,9 @@ def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
         print('Running gradle-spotless with wrapper enabled.')
         cmd = configure_gradle_wrapper()
 
-    cmd_output(cmd, 'spotlessJavaCheck', 'spotlessJavaApply')
+    res = cmd_output(cmd, 'spotlessJavaCheck', 'spotlessJavaApply')
+
+    print(res)
 
     return 0
 

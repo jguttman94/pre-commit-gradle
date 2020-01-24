@@ -23,7 +23,9 @@ def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
         print('Running gradle-task with wrapper enabled.')
         cmd = configure_gradle_wrapper()
 
-    cmd_output(cmd, **args.tasks)
+    res = cmd_output(cmd, **args.tasks)
+
+    print(res)
 
     return 0
 
