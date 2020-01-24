@@ -10,18 +10,18 @@ from pre_commit_hooks.util import cmd_output
 
 
 def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '-w', '--wrapper', action='store_true',
-        dest='wrapper',
-        help='Runs commands using gradlew. Requires `gradle wrapper` configuration within the project.',
-    )
-    args = parser.parse_args(argv)
+    # parser = argparse.ArgumentParser()
+    # parser.add_argument(
+    #     '-w', '--wrapper', action='store_true',
+    #     dest='wrapper',
+    #     help='Runs commands using gradlew. Requires `gradle wrapper` configuration within the project.',
+    # )
+    # args = parser.parse_args(argv)
 
     cmd = 'gradle'
-    if args.wrapper:
-        cmd = '.%sgradlew' % os.path.pathsep
-
+    # if args.wrapper:
+    #     cmd = '.%sgradlew' % os.path.pathsep
+    #
     cmd_output(cmd, 'check')
 
     return 0

@@ -3,5 +3,3 @@
     description: Runs java unit tests using gradle check
     entry: gradle-check
     language: python
-    args: [--wrapper]
-
