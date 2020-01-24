@@ -1,18 +1,16 @@
 -   id: gradle-check
     name: gradle check
-    description: Runs java unit tests using `gradle check`
+    description: Runs java unit tests using "gradle check"
     entry: gradle-check
     language: python
-    args: [-w]
 -   id: gradle-build
     name: gradle build
-    description: Builds java project using `gradle build`
+    description: Builds java project using "gradle build"
     entry: gradle-build
     language: python
-    args: [-w]
 -   id: gradle-spotless
     name: gradle spotless
-    description: Lints java project using `gradle spotlessJavaCheck spotlessJavaApply`
+    description: Lints java project using "gradle spotlessJavaCheck spotlessJavaApply"
     entry: gradle-spotless
     language: python
 -   id: gradle-task
