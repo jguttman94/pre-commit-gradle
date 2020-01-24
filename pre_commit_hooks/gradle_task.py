@@ -12,8 +12,7 @@ from pre_commit_hooks.util import cmd_output
 def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '-w', '--wrapper', action='store_true',
-        dest='wrapper',
+        '-w', '--wrapper', action='store_false',
         help='Runs commands using gradlew. Requires `gradle wrapper` configuration within the project.',
     )
     parser.add_argument('tasks', nargs='*', help='gradle tasks to run')
