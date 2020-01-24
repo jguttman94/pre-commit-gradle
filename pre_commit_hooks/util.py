@@ -4,7 +4,12 @@ from __future__ import unicode_literals
 
 import subprocess
 from typing import Any
-from typing import Set
+
+import os
+
+
+class InitializationError(RuntimeError):
+    pass
 
 
 class CalledProcessError(RuntimeError):
@@ -21,3 +26,11 @@ def cmd_output(*cmd, **kwargs):  # type: (*str, **Any) -> str
     if retcode is not None and proc.returncode != retcode:
         raise CalledProcessError(cmd, retcode, proc.returncode, stdout, stderr)
     return stdout
+
+
+def configure_gradle_wrapper() -> str:
+    if not os.path.exists('.{}gradlew'.format(os.path.sep)):
+        raise InitializationError('Could not locate gradle wrapper. Initialize with `gradle wrapper`, or remove the '
+                                  '-w (--wrapper) flag to use native gradle.')
+
+    return '.{}gradlew'.format(os.path.sep)
