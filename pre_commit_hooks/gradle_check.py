@@ -18,6 +18,7 @@ def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
 
     cmd = 'gradle'
     if args.wrapper:
+        print('Running gradle-check with wrapper enabled.')
         cmd = configure_gradle_wrapper()
 
     cmd_output(cmd, 'check')
