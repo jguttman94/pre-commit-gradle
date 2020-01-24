@@ -3,4 +3,5 @@
     description: Runs java unit tests using gradle check
     entry: gradle-check
     language: python
+    pass_filenames: false
     args: [-w]
