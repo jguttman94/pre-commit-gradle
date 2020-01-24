@@ -1,8 +1,7 @@
 from __future__ import print_function
 
 import argparse
-import os.path
-import sys
+import os
 from typing import Optional
 from typing import Sequence
 
@@ -21,7 +20,7 @@ def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
     cmd = 'gradle'
     if args.wrapper:
         print('Gradle wrapper enabled with -w or --wrapper flag.')
-        cmd = '.%sgradlew' % os.path.pathsep
+        cmd = '.{}gradlew'.format(os.pathsep)
 
     cmd_output(cmd, 'check')
 
@@ -29,4 +28,4 @@ def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    exit(main())
