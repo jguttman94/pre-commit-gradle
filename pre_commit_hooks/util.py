@@ -20,6 +20,7 @@ def cmd_output(*cmd, **kwargs):  # type: (*str, **Any) -> str
     retcode = kwargs.pop('retcode', 0)
     kwargs.setdefault('stdout', subprocess.PIPE)
     kwargs.setdefault('stderr', subprocess.PIPE)
+    kwargs.setdefault('shell', True)
     proc = subprocess.Popen(cmd, **kwargs)
     stdout, stderr = proc.communicate()
     stdout = stdout.decode('UTF-8')
