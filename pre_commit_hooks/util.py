@@ -10,10 +10,6 @@ from whichcraft import which
 import os
 
 
-class InitializationError(RuntimeError):
-    pass
-
-
 class CalledProcessError(RuntimeError):
     pass
 
@@ -32,18 +28,36 @@ def cmd_output(*cmd, **kwargs):  # type: (*str, **Any) -> str
     return stdout
 
 
-def configure_gradle() -> str:
+def run_gradle_task(*tasks):  # type: (*str) -> int
     if which('gradle') is None:
-        raise InitializationError('Gradle could not be detected.')
+        print('Gradle could not be detected.')
+        return 1
 
-    print('Running gradle-check with native gradle.')
-    return 'gradle'
+    try:
+        print('Running gradle task with native gradle.')
+        cmd_output('gradle', *tasks)
+    except CalledProcessError as e:
+        print('An error occurred running gradle task:\n')
+        print(str(e))
+        return 1
+
+    return 0
 
 
-def configure_gradle_wrapper() -> str:
+def run_gradle_wrapper_task(*tasks):  # type: (*str) -> int
     if which('gradlew', path='.') is None:
-        raise InitializationError('Could not locate gradle wrapper. Initialize with `gradle wrapper`, or remove the '
-                                  '-w (--wrapper) flag to use native gradle.')
+        print(
+            'Could not locate gradle wrapper. Initialize with `gradle wrapper`, or remove the -w (--wrapper) flag to '
+            'use native gradle.'
+        )
+        return 1
 
-    print('Running gradle-check with wrapper enabled.')
-    return '.{}gradlew'.format(os.path.sep)
+    try:
+        print('Running gradle task with wrapper enabled.')
+        cmd_output('.{}gradlew'.format(os.path.sep), *tasks)
+    except CalledProcessError as e:
+        print('An error occurred running gradle wrapper task:\n')
+        print(str(e))
+        return 1
+
+    return 0

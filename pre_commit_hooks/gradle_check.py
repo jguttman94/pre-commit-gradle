@@ -4,7 +4,7 @@ import argparse
 from typing import Optional
 from typing import Sequence
 
-from pre_commit_hooks.util import cmd_output, configure_gradle_wrapper, configure_gradle
+from pre_commit_hooks.util import cmd_output, run_gradle_wrapper_task, run_gradle_task
 
 
 def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
@@ -15,10 +15,8 @@ def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
     )
     args = parser.parse_args(argv)
 
-    cmd = configure_gradle_wrapper() if args.wrapper else configure_gradle()
-    cmd_output(cmd, 'check')
-
-    return 0
+    tasks = ['check']
+    return run_gradle_wrapper_task(*tasks) if args.wrapper else run_gradle_task(*tasks)
 
 
 if __name__ == '__main__':
