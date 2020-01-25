@@ -1,12 +1,10 @@
 from __future__ import print_function
 
 import argparse
-import os.path
-import sys
 from typing import Optional
 from typing import Sequence
 
-from pre_commit_hooks.util import cmd_output, configure_gradle_wrapper
+from pre_commit_hooks.util import cmd_output, configure_gradle_wrapper, configure_gradle
 
 
 def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
@@ -18,15 +16,11 @@ def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
     parser.add_argument('tasks', nargs='*', help='gradle tasks to run')
     args = parser.parse_args(argv)
 
-    cmd = 'gradle'
-    if args.wrapper:
-        print('Running gradle-task with wrapper enabled.')
-        cmd = configure_gradle_wrapper()
-
+    cmd = configure_gradle_wrapper() if args.wrapper else configure_gradle()
     cmd_output(cmd, **args.tasks)
 
     return 0
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    exit(main())

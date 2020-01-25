@@ -5,6 +5,8 @@ from __future__ import unicode_literals
 import subprocess
 from typing import Any
 
+from whichcraft import which
+
 import os
 
 
@@ -30,9 +32,18 @@ def cmd_output(*cmd, **kwargs):  # type: (*str, **Any) -> str
     return stdout
 
 
+def configure_gradle() -> str:
+    if which('gradle') is None:
+        raise InitializationError('Gradle could not be detected.')
+
+    print('Running gradle-check with native gradle.')
+    return 'gradle'
+
+
 def configure_gradle_wrapper() -> str:
-    if not os.path.exists('.{}gradlew'.format(os.path.sep)):
+    if which('gradlew', path='.') is None:
         raise InitializationError('Could not locate gradle wrapper. Initialize with `gradle wrapper`, or remove the '
                                   '-w (--wrapper) flag to use native gradle.')
 
+    print('Running gradle-check with wrapper enabled.')
     return '.{}gradlew'.format(os.path.sep)
