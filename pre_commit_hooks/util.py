@@ -24,6 +24,7 @@ def cmd_output(*cmd, **kwargs):  # type: (*str, **Any) -> str
     stdout = stdout.decode('UTF-8')
     print(stdout)
     if retcode is not None and proc.returncode != retcode:
+        print(stderr)
         raise CalledProcessError(cmd, retcode, proc.returncode, stdout, stderr)
     return stdout
 
@@ -36,12 +37,10 @@ def run_gradle_task(*tasks):  # type: (*str) -> int
     try:
         print('Running gradle task with native gradle.')
         cmd_output('gradle', *tasks)
-    except CalledProcessError as e:
-        print('An error occurred running gradle task:\n')
-        print(str(e))
+        return 0
+    except CalledProcessError:
+        print('The above error occurred running gradle task.')
         return 1
-
-    return 0
 
 
 def run_gradle_wrapper_task(*tasks):  # type: (*str) -> int
@@ -55,9 +54,7 @@ def run_gradle_wrapper_task(*tasks):  # type: (*str) -> int
     try:
         print('Running gradle task with wrapper enabled.')
         cmd_output('.{}gradlew'.format(os.path.sep), *tasks)
+        return 0
     except CalledProcessError as e:
-        print('An error occurred running gradle wrapper task:\n')
-        print(str(e))
+        print('The above error occurred running gradle wrapper task.')
         return 1
-
-    return 0
