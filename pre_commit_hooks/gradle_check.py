@@ -15,7 +15,10 @@ def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
     )
     args = parser.parse_args(argv)
 
-    return run_gradle_wrapper_task('check') if args.wrapper else run_gradle_task('check')
+    if args.wrapper:
+        return run_gradle_wrapper_task('check')
+    else:
+        return run_gradle_task('check')
 
 
 if __name__ == '__main__':

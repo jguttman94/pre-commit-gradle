@@ -16,7 +16,10 @@ def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
     parser.add_argument('tasks', nargs='*', help='gradle tasks to run')
     args = parser.parse_args(argv)
 
-    return run_gradle_wrapper_task(*args.tasks) if args.wrapper else run_gradle_task(*args.tasks)
+    if args.wrapper:
+        return run_gradle_wrapper_task(*args.tasks)
+    else:
+        return run_gradle_task(*args.tasks)
 
 
 if __name__ == '__main__':
