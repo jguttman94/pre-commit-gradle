@@ -3,6 +3,7 @@
 - Default disable output from gradle commands
 - '-o, --output' argument added to enable gradle output
 - Colored print statements using ANSI escape sequences
+- Human readable escape statements on missing gradle or gradle wrapper
 
 0.2.0 - 2020-01-25
 ==================
