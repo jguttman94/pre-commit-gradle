@@ -10,6 +10,17 @@ from whichcraft import which
 import os
 
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
 class CalledProcessError(RuntimeError):
     pass
 
@@ -32,30 +43,30 @@ def cmd_output(*cmd, **kwargs):  # type: (*str, **Any) -> str
 
 def run_gradle_task(*tasks):  # type: (*str) -> int
     if which('gradle') is None:
-        print("Gradle could not be detected.")
+        print(f"{bcolors.FAIL}Gradle could not be detected.{bcolors.ENDC}")
         return 1
 
     try:
-        print("Running 'gradle {}' with native gradle.".format(' '.join(tasks)))
+        print("{}Running 'gradle {}' with native gradle.{}".format(bcolors.OKBLUE, ' '.join(tasks), bcolors.ENDC))
         cmd_output('gradle', *tasks)
         return 0
     except CalledProcessError:
-        print("The above error occurred running gradle task.")
+        print(f"{bcolors.FAIL}The above error occurred running gradle task.{bcolors.ENDC}")
         return 1
 
 
 def run_gradle_wrapper_task(*tasks):  # type: (*str) -> int
     if which('gradlew', path='.') is None:
         print(
-            "Could not locate gradle wrapper. Initialize with `gradle wrapper`, "
-            "or remove the -w (--wrapper) flag to use native gradle."
+            f"{bcolors.FAIL}Could not locate gradle wrapper. Initialize with `gradle wrapper`, "
+            f"or remove the -w (--wrapper) flag to use native gradle.{bcolors.ENDC}"
         )
         return 1
 
     try:
-        print("Running 'gradle {}' with wrapper enabled.".format(' '.join(tasks)))
+        print("{}Running 'gradle {}' with wrapper enabled.{}".format(bcolors.OKBLUE, ' '.join(tasks), bcolors.ENDC))
         cmd_output('.{}gradlew'.format(os.path.sep), *tasks)
         return 0
     except CalledProcessError as e:
-        print("The above error occurred running gradle wrapper task.")
+        print(f"{bcolors.FAIL}The above error occurred running gradle wrapper task.{bcolors.ENDC}")
         return 1
