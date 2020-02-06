@@ -13,12 +13,16 @@ def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
         '-w', '--wrapper', action='store_true',
         help='Runs commands using gradlew. Requires gradle wrapper configuration within the project.'
     )
+    parser.add_argument(
+        '-o', '--output', action='store_true',
+        help='Prints the output of all executed gradle commands.'
+    )
     args = parser.parse_args(argv)
 
     if args.wrapper:
-        return run_gradle_wrapper_task('spotlessJavaCheck', 'spotlessJavaApply')
+        return run_gradle_wrapper_task(args.output, 'spotlessJavaCheck', 'spotlessJavaApply')
     else:
-        return run_gradle_task('spotlessJavaCheck', 'spotlessJavaApply')
+        return run_gradle_task(args.output, 'spotlessJavaCheck', 'spotlessJavaApply')
 
 
 if __name__ == '__main__':

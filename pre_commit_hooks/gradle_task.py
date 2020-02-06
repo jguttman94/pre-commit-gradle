@@ -13,13 +13,17 @@ def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
         '-w', '--wrapper', action='store_true',
         help='Runs commands using gradlew. Requires gradle wrapper configuration within the project.'
     )
+    parser.add_argument(
+        '-o', '--output', action='store_true',
+        help='Prints the output of all executed gradle commands.'
+    )
     parser.add_argument('tasks', nargs='*', help='gradle tasks to run')
     args = parser.parse_args(argv)
 
     if args.wrapper:
-        return run_gradle_wrapper_task(*args.tasks)
+        return run_gradle_wrapper_task(args.output, *args.tasks)
     else:
-        return run_gradle_task(*args.tasks)
+        return run_gradle_task(args.output, *args.tasks)
 
 
 if __name__ == '__main__':
