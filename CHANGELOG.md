@@ -1,6 +1,6 @@
 0.2.1 - 2020-02-10
 ==================
-- Bug - Remove use of shell in python subprocess execution 
+- Bug - Adjusted use of shell in python subprocess execution by using tuple expansion on command execution
 
 0.2.0 - 2020-02-05
 ==================
