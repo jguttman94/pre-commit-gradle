@@ -1,3 +1,7 @@
+0.2.1 - 2020-02-10
+==================
+- Bug - Remove use of shell in python subprocess execution 
+
 0.2.0 - 2020-02-05
 ==================
 - Safety checks on gradle and gradlew installations before execution
