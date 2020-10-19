@@ -20,9 +20,9 @@ def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
     args = parser.parse_args(argv)
 
     if args.wrapper:
-        return run_gradle_wrapper_task(args.output, 'spotlessJavaCheck', 'spotlessJavaApply')
+        return run_gradle_wrapper_task(args.output, 'spotlessCheck', 'spotlessApply')
     else:
-        return run_gradle_task(args.output, 'spotlessJavaCheck', 'spotlessJavaApply')
+        return run_gradle_task(args.output, 'spotlessCheck', 'spotlessApply')
 
 
 if __name__ == '__main__':
