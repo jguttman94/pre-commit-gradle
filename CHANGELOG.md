@@ -1,3 +1,6 @@
+0.3.0 - 2021-01-08
+- Update - `gradle-spotless` now executes `spotlessCheck` and `spotlessApply` rather than `spotlessJavaCheck` and `spotlessJavaApply`. Now supports projects using Java Kotlin, Scala, etc.
+
 0.2.1 - 2020-02-10
 ==================
 - Bug - Adjusted use of shell in python subprocess execution by using tuple expansion on command execution
