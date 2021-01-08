@@ -12,7 +12,7 @@
     pass_filenames: false
 -   id: gradle-spotless
     name: gradle spotless
-    description: Lints java project using "gradle spotlessJavaCheck spotlessJavaApply"
+    description: Lints the project using "gradle spotlessCheck spotlessApply"
     entry: gradle-spotless
     language: python
     pass_filenames: false
