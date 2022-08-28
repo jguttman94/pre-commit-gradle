@@ -1,3 +1,7 @@
+0.4.0 - 2022-08-28
+==================
+- New Feat - Add `-p, --path` argument for alternative path to gradle executable.
+
 0.3.0 - 2021-01-08
 ==================
 - Update - `gradle-spotless` now executes `spotlessCheck` and `spotlessApply` rather than `spotlessJavaCheck` and `spotlessJavaApply`. Now supports projects using Java Kotlin, Scala, etc.

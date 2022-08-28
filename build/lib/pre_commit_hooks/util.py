@@ -25,9 +25,8 @@ class CalledProcessError(RuntimeError):
     pass
 
 
-def cmd_output(*cmd, **kwargs):  # type: (bool, *str, **Any) -> str
+def cmd_output(output, *cmd, **kwargs):  # type: (bool, *str, **Any) -> str
     retcode = kwargs.pop('retcode', 0)
-    output = kwargs.pop('output', 0)
     kwargs.setdefault('stdout', subprocess.PIPE)
     kwargs.setdefault('stderr', subprocess.PIPE)
     kwargs.setdefault('shell', True)
@@ -42,22 +41,22 @@ def cmd_output(*cmd, **kwargs):  # type: (bool, *str, **Any) -> str
     return stdout
 
 
-def run_gradle_task(output, cwd, *tasks):  # type: (bool, str, *str) -> int
+def run_gradle_task(output, *tasks):  # type: (bool, *str) -> int
     if which('gradle') is None:
         print(f"{bcolors.FAIL}Gradle could not be detected.{bcolors.ENDC}")
         return 1
 
     try:
         print("{}Running 'gradle {}' with native gradle.{}".format(bcolors.OKBLUE, ' '.join(tasks), bcolors.ENDC))
-        cmd_output('gradle', *tasks, output=output, cwd=cwd)
+        cmd_output(output, 'gradle', *tasks)
         return 0
     except CalledProcessError:
         print(f"{bcolors.FAIL}The above error occurred running gradle task.{bcolors.ENDC}")
         return 1
 
 
-def run_gradle_wrapper_task(output, cwd, *tasks):  # type: (bool, str, *str) -> int
-    if which('gradlew', path=cwd) is None:
+def run_gradle_wrapper_task(output, *tasks):  # type: (bool, *str) -> int
+    if which('gradlew', path='.') is None:
         print(
             f"{bcolors.FAIL}Could not locate gradle wrapper. Initialize with `gradle wrapper`, "
             f"or remove the -w (--wrapper) flag to use native gradle.{bcolors.ENDC}"
@@ -66,7 +65,7 @@ def run_gradle_wrapper_task(output, cwd, *tasks):  # type: (bool, str, *str) -> 
 
     try:
         print("{}Running 'gradle {}' with wrapper enabled.{}".format(bcolors.OKBLUE, ' '.join(tasks), bcolors.ENDC))
-        cmd_output('.{}gradlew'.format(os.path.sep), *tasks, output=output, cwd=cwd)
+        cmd_output(output, '.{}gradlew'.format(os.path.sep), *tasks)
         return 0
     except CalledProcessError as e:
         print(f"{bcolors.FAIL}The above error occurred running gradle wrapper task.{bcolors.ENDC}")
