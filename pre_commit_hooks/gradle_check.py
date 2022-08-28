@@ -17,12 +17,16 @@ def main(argv=None):  # type: (Optional[Sequence[str]]) -> int
         '-o', '--output', action='store_true',
         help='Prints the output of all executed gradle commands.'
     )
+    parser.add_argument(
+        '-p', '--path', action='store_true', default = os.getcwd(),
+        help='Path to gradle executable; if omitted, it is assumed gradle is installed at project root'
+    )
     args = parser.parse_args(argv)
 
     if args.wrapper:
-        return run_gradle_wrapper_task(args.output, 'check')
+        return run_gradle_wrapper_task(args.output, args.path, 'check')
     else:
-        return run_gradle_task(args.output, 'check')
+        return run_gradle_task(args.output, args.path, 'check')
 
 
 if __name__ == '__main__':

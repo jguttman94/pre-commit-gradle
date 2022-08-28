@@ -22,14 +22,18 @@ Add this to your `.pre-commit-config.yaml`
 - `gradle-check` - Run gradle unit test tasks
     - Use gradlew (gradle wrapper) `args: ['-w', --wrapper]`.
     - Print output from gradle command `args: ['-o', --output]`.
+    - Provide alternative path to gradle `args: ['-p, --path]`.
 - `gradle-build` - Run gradle build tasks
     - Use gradlew (gradle wrapper) `args: ['-w', --wrapper]`.
     - Print output from gradle command `args: ['-o', --output]`.
+    - Provide alternative path to gradle `args: ['-p, --path]`.
 - `gradle-spotless` - Run gradle spotless tasks for java linting
     - Require spotless plugin: [github](https://github.com/diffplug/spotless/tree/master/plugin-gradle)
     - Use gradlew (gradle wrapper) `args: ['-w', --wrapper]`.
     - Print output from gradle command `args: ['-o', --output]`.
+    - Provide alternative path to gradle `args: ['-p, --path]`.
 - `gradle-task` - Run any arbitrary gradle commands
     - Provide task name(s) to execute via arguments `args: ['clean build bootRun']`
     - Use gradlew (gradle wrapper) `args: ['-w', --wrapper]`.
     - Print output from gradle command `args: ['-o', --output]`.
+    - Provide alternative path to gradle `args: ['-p, --path]`.
